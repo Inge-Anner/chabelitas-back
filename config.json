@@ -1,0 +1,20 @@
+{
+    "dev": {
+      "ENV": "dev",
+      "NODE_ENV": "dev",
+      "DB_HOST": "sql761.main-hosting.eu",
+      "DB_DATABASE": "u943881392_chabelitas",
+      "DB_USERNAME": "u943881392_admin",
+      "DB_PASSWORD": "8SHRgm:g",
+      "DEPENDENCIES_LAYER": "arn:aws:lambda:us-east-1:254045361797:layer:prod-ChabelitaBackependenciesLayer:1"
+    },
+    "prod": {
+      "ENV": "production",
+      "NODE_ENV": "production",
+      "DB_HOST": "sql761.main-hosting.eu",
+      "DB_DATABASE": "u943881392_chabelitas",
+      "DB_USERNAME": "u943881392_admin",
+      "DB_PASSWORD": "8SHRgm:g",
+      "DEPENDENCIES_LAYER": "arn:aws:lambda:us-east-1:254045361797:layer:prod-ChabelitaBackependenciesLayer:1"
+    }
+  }

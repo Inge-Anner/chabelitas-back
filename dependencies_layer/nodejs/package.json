@@ -1,0 +1,13 @@
+{
+  "dependencies": {
+    "@hapi/joi-date": "^2.0.1",
+    "axios": "^0.27.2",
+    "dotenv": "^16.0.1",
+    "joi": "^17.6.0",
+    "moment-timezone": "^0.5.34",
+    "mysql2": "^2.3.3",
+    "path": "^0.12.7",
+    "sequelize": "^6.21.3",
+    "uuid": "^8.3.2"
+  }
+}

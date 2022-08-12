@@ -1,0 +1,33 @@
+{
+  "name": "chabelitas-back",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Inge-Anner/chabelitas-back.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Inge-Anner/chabelitas-back/issues"
+  },
+  "homepage": "https://github.com/Inge-Anner/chabelitas-back#readme",
+  "devDependencies": {
+    "@hapi/joi-date": "^2.0.1",
+    "axios": "^0.27.2",
+    "dotenv": "^16.0.1",
+    "joi": "^17.6.0",
+    "moment-timezone": "^0.5.34",
+    "mysql2": "^2.3.3",
+    "path": "^0.12.7",
+    "sequelize": "^6.21.3",
+    "serverless-deployment-bucket": "^1.6.0",
+    "serverless-offline": "^9.2.0",
+    "serverless-prune-plugin": "^2.0.1",
+    "uuid": "^8.3.2"
+  }
+}
