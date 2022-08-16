@@ -14,6 +14,8 @@ module.exports = (sequelize, DataTypes) => {
   Visualization.init({
     visualizationId: {
       type: DataTypes.INTEGER,
+      autoIncrement: true,
+      primaryKey: true,
       field: 'id_visualizacion',
     },
     productId: {

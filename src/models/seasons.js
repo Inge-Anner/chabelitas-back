@@ -14,6 +14,8 @@ module.exports = (sequelize, DataTypes) => {
   Season.init({
     seasonId: {
       type: DataTypes.INTEGER,
+      autoIncrement: true,
+      primaryKey: true,
       field: 'id_temporada',
     },
     statusId: {
@@ -22,7 +24,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     seasonName: {
       type: DataTypes.STRING,
-      field: 'nombre_season',
+      field: 'nombre_temporada',
     },
   }, {
     sequelize,

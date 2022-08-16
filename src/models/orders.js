@@ -1,7 +1,7 @@
 const { Model } = require('sequelize')
 
 module.exports = (sequelize, DataTypes) => {
-  class Order extends Model {
+  class Orders extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -11,9 +11,11 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
 
-  Order.init({
+  Orders.init({
     orderId: {
       type: DataTypes.INTEGER,
+      autoIncrement: true,
+      primaryKey: true,
       field: 'id_pedido',
     },
     statusorderId: {
@@ -27,15 +29,15 @@ module.exports = (sequelize, DataTypes) => {
     ticketorder: {
         type: DataTypes.STRING,
         field: 'boleta_pedido',
-      },
+    },
       nameorder: {
         type: DataTypes.STRING,
         field: 'nombre_pedido',
-      },
+    },
       lastnameorder: {
         type: DataTypes.STRING,
         field: 'apellido_pedido',
-      },
+    },
     datecreated: {
       type: DataTypes.DATE,
       field: 'fecha_creado',
@@ -43,24 +45,24 @@ module.exports = (sequelize, DataTypes) => {
     dateconfirmed: {
         type: DataTypes.DATE,
         field: 'fecha_confirmado',
-      },
+    },
       datedeliver: {
         type: DataTypes.DATE,
         field: 'fecha_entrega',
-      },
+    },
       adressdeliver: {
         type: DataTypes.STRING,
         field: 'direccion_entrega',
-      },
+    },
     totalorder: {
-      type: DataTypes.FLOAT,
+      type: DataTypes.FLOAT(8, 0),
       field: 'total_pedido',
     },
     
   }, {
     sequelize,
-    modelName: 'Order',
+    modelName: 'Orders',
     timestamps: false,
   });
-  return Order;
+  return Orders;
 }
