@@ -5,7 +5,7 @@ module.exports = (sequelize, DataTypes) => {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
-     * The models/index file will call this method automatically.
+     * The `models/index` file will call this method automatically.
      */
     static associate(models) {
     }
@@ -14,8 +14,6 @@ module.exports = (sequelize, DataTypes) => {
   Category.init({
     categoryId: {
       type: DataTypes.INTEGER,
-      autoIncrement: true,
-      primaryKey: true,
       field: 'id_Categoria',
     },
     statusId: {
