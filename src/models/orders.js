@@ -18,43 +18,43 @@ module.exports = (sequelize, DataTypes) => {
       primaryKey: true,
       field: 'id_pedido',
     },
-    statusorderId: {
+    statusOrderId: {
       type: DataTypes.INTEGER,
       field: 'id_estado_pedido',
     },
-    phoneorder: {
+    phoneOrder: {
       type: DataTypes.STRING,
       field: 'tel_pedido',
     },
-    ticketorder: {
+    ticketOrder: {
         type: DataTypes.STRING,
         field: 'boleta_pedido',
     },
-      nameorder: {
+      nameOrder: {
         type: DataTypes.STRING,
         field: 'nombre_pedido',
     },
-      lastnameorder: {
+      lastNameOrder: {
         type: DataTypes.STRING,
         field: 'apellido_pedido',
     },
-    datecreated: {
+    dateCreated: {
       type: DataTypes.DATE,
       field: 'fecha_creado',
     },
-    dateconfirmed: {
+    dateConfirmed: {
         type: DataTypes.DATE,
         field: 'fecha_confirmado',
     },
-      datedeliver: {
+      dateDeliver: {
         type: DataTypes.DATE,
         field: 'fecha_entrega',
     },
-      adressdeliver: {
+      adressDeliver: {
         type: DataTypes.STRING,
         field: 'direccion_entrega',
     },
-    totalorder: {
+    totalOrder: {
       type: DataTypes.FLOAT(8, 0),
       field: 'total_pedido',
     },
