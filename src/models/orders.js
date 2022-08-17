@@ -16,11 +16,11 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       autoIncrement: true,
       primaryKey: true,
-      field: 'ids_orden',
+      field: 'id_pedidoss',
     },
     statusorderId: {
       type: DataTypes.INTEGER,
-      field: 'ids_estado_pedido',
+      field: 'id_estado_pedidos',
     },
     phoneorder: {
       type: DataTypes.STRING,
