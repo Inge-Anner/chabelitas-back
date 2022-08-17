@@ -23,7 +23,7 @@ module.exports = (sequelize, DataTypes) => {
       field: 'id_producto',
     },
     dateVisualization: {
-      type: DataTypes.date,
+      type: DataTypes.DATE,
       field: 'fecha_visualizacion',
     },
   }, {
