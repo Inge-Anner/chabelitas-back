@@ -1,7 +1,7 @@
 const { Model } = require('sequelize')
 
 module.exports = (sequelize, DataTypes) => {
-  class Details_orders extends Model {
+  class DetailsOrder extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -11,8 +11,8 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
 
-  Details_orders.init({
-    detailorderId: {
+  DetailsOrder.init({
+    detailOrderId: {
       type: DataTypes.INTEGER,
       autoIncrement: true,
       primaryKey: true,
@@ -26,11 +26,11 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       field: 'id_pedido',
     },
-    detailorderquantity: {
+    detailOrderQuantity: {
       type: DataTypes.FLOAT(8, 0),
       field: 'cantidad_detalle_pedido',
     },
-    orderdetailsubtotal: {
+    orderDetailSubtotal: {
       type: DataTypes.FLOAT(8, 0),
       field: 'subtotal_detalle_pedido',
     },
@@ -40,5 +40,5 @@ module.exports = (sequelize, DataTypes) => {
     modelName: 'Details_orders',
     timestamps: false,
   });
-  return Details_orders;
+  return DetailsOrder;
 }
