@@ -12,15 +12,14 @@ const getCategoryById = joi.object().keys({
   }).required();
 
 const insertCategory = joi.object().keys({
-  categoryId: joi.number().integer().required(),
   statusId: joi.number().integer().required(),
   categoryName: joi.string().required(),
   }).required();
 
 const updateCategory = joi.object().keys({
   categoryId: joi.number().integer().required(),
-  statusId: joi.number().integer().required(),
-  categoryName: joi.string().required(),
+  statusId: joi.number().integer(),
+  categoryName: joi.string(),
   }).required();
 
 const deleteCategory = joi

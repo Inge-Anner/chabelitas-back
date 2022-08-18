@@ -33,7 +33,7 @@ const getDetailsOrderById = async (data) => {
           error: false,
           statusCode: 200,
           message: 'Get DetailOrder Successfully',
-          data: getProduct,
+          data: getDetailOrder,
         };
       } else {
         response = {
@@ -162,7 +162,6 @@ const updateDetailsOrder = async (data) => {
     return response;
   }
 };
-
 module.exports = {
   getDetailsOrderById,
   insertDetailOrder,
