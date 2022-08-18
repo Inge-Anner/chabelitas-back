@@ -153,8 +153,7 @@ functions:
           path: /user/{userId}
           method: DELETE
           cors: true
-
-get-category:
+  get-category:
     handler: src/services/category.getCategory
     layers:
       - ${file(./config.json):${opt:stage, self:provider.stage, 'dev'}.DEPENDENCIES_LAYER}
@@ -163,7 +162,7 @@ get-category:
           path: /category
           method: GET
           cors: true
- get-category-byId:
+  get-category-byId:
     handler: src/services/category.getCategoryById
     layers:
       - ${file(./config.json):${opt:stage, self:provider.stage, 'dev'}.DEPENDENCIES_LAYER}
@@ -172,7 +171,7 @@ get-category:
           path: /category/{categoryId}
           method: GET
           cors: true
-insert-category:
+  insert-category:
     handler: src/services/category.insertCategory
     layers:
       - ${file(./config.json):${opt:stage, self:provider.stage, 'dev'}.DEPENDENCIES_LAYER}
@@ -181,7 +180,7 @@ insert-category:
           path: /category
           method: POST
           cors: true
-update-category:
+  update-category:
     handler: src/services/category.updateCategory
     layers:
       - ${file(./config.json):${opt:stage, self:provider.stage, 'dev'}.DEPENDENCIES_LAYER}
@@ -190,21 +189,15 @@ update-category:
           path: /category/{categoryId}
           method: PUT
           cors: true
-delete-category:
-    handler: src/services/category.deleteCategory
+  delete-category:
+    handler: src/services/category.deleteCategoryById
     layers:
       - ${file(./config.json):${opt:stage, self:provider.stage, 'dev'}.DEPENDENCIES_LAYER}
     events:
       - http:
           path: /category/{categoryId}
           method: DELETE
-          cors: true
-
-
-
-
-
-
+          cors: true          
 package:
   patterns:
     - '!dependencies_layer/**'
