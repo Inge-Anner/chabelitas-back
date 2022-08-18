@@ -85,7 +85,7 @@ const getCategoryById = async (data) => {
             error: false,
             statusCode: 200,
             message: 'Get Category Successfully',
-            data: getCategory,
+            data: getCategoryById,
           };
         } else {
           response = {
