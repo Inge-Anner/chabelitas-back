@@ -78,7 +78,7 @@ functions:
       - ${file(./config.json):${opt:stage, self:provider.stage, 'dev'}.DEPENDENCIES_LAYER}
     events:
       - http:
-          path: /order/{startDate}/{endDate}
+          path: /order
           method: GET
           cors: true
   insert-order:
@@ -108,6 +108,7 @@ functions:
           path: /order/{orderId}
           method: DELETE
           cors: true
+
 
 package:
   patterns:

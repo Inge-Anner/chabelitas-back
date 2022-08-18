@@ -1,6 +1,6 @@
-const chabelitaController = require('./controllers/orders.controller');
-const headers = require('./lib/headers');
-const getBody = require('./lib/getBody');//
+const chabelitaController = require('../controllers/orders.controller');
+const headers = require('../lib/headers');
+const getBody = require('../lib/getBody');//
 
 const getOrderById = async (event, context, callback) => {
   context.callbackWaitsForEmptyEventLoop = false;
