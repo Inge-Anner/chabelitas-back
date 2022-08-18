@@ -5,7 +5,7 @@ const joi = joiBase.extend(joiDate);
 
 
 const getDetailOrderById = joi.object().keys({
-  OrderId: joi.number().integer().required(),
+  orderId: joi.number().integer().required(),
   }).required();
 
 const insertDetailOrder = joi.object().keys({
@@ -16,23 +16,15 @@ const insertDetailOrder = joi.object().keys({
   }).required();
 
 const updateDetailOrder = joi.object().keys({
-  detailOrderId: joi.number().integer().required(),
+  detailOrderId: joi.number().integer(),
   productId: joi.number().integer(),
-  orderId: joi.number().integer(),
+  orderId: joi.number().integer().required(),
   detailOrderQuantity: joi.number(),
   orderDetailSubtotal: joi.number(),
   }).required();
-
-const deleteDetailOrder = joi
-  .object()
-  .keys({
-    detailOrderId: joi.number().integer().required(),
-  })
-  .required();
 
 module.exports = {
   getDetailOrderById,
   insertDetailOrder,
   updateDetailOrder,
-  deleteDetailOrder,
 };
