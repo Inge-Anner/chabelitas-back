@@ -2,7 +2,7 @@ const sequelize = require('sequelize');
 const { v4: uuidv4 } = require('uuid');
 const schema = require('../schemas/users.schema');
 const { User } = require('../models');
-
+//
 const getUser = async (data) => {
     try {
       const { error, value } = schema.getUser.validate(data, {
@@ -70,22 +70,22 @@ const getUserById = async (data) => {
       } else {
         const { userId } = value;
         console.info(`get User to DB with id: ${userId}`);
-        let getUser = null;
+        let getUserById = null;
   
         const where = { userId };
   
-        getUser = await User.findOne({
+        getUserById = await User.findOne({
           where,
         });
-        console.info('get User:', JSON.stringify(getUser));
+        console.info('get User:', JSON.stringify(getUserById));
   
-        if (getUser) {
-          console.info('Get User By Id:', JSON.stringify(getUser));
+        if (getUserById) {
+          console.info('Get User By Id:', JSON.stringify(getUserById));
           response = {
             error: false,
             statusCode: 200,
             message: 'Get User Successfully',
-            data: getUser,
+            data: getUserById,
           };
         } else {
           response = {
@@ -169,7 +169,7 @@ const getUserById = async (data) => {
           message: error.details.map((e) => e.message),
         };
       } else {
-        const { productId } = value;
+        const { userId } = value;
         console.info(
           `Update User to DB: id:${userId}`
         );
@@ -218,7 +218,7 @@ const getUserById = async (data) => {
 
   const deleteUserById = async (data) => {
     try {
-      const { error, value } = schema.deleteUser.validate(data, {
+      const { error, value } = schema.deleteUserById.validate(data, {
         abortEarly: false,
       });
   

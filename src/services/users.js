@@ -1,7 +1,7 @@
 const chabelitaController = require('../controllers/users.controller');
 const headers = require('../lib/headers');
 const getBody = require('../lib/getBody');
-
+//
 const getUser = async (event, context, callback) => {
   context.callbackWaitsForEmptyEventLoop = false;
 
@@ -239,4 +239,3 @@ const getUserById = async (event, context, callback) => {
     updateUser,
     deleteUser,
   };
-  //
