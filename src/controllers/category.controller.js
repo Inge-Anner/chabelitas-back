@@ -70,17 +70,17 @@ const getCategoryById = async (data) => {
       } else {
         const { categoryId } = value;
         console.info(`get Category to DB with id: ${categoryId}`);
-        let getCategory = null;
+        let getCategoryById = null;
   
         const where = { categoryId };
   
-        getCategory = await Category.findOne({
+        getCategoryById = await Category.findOne({
           where,
         });
-        console.info('get Category:', JSON.stringify(getCategory));
+        console.info('get Category:', JSON.stringify(getCategoryById));
   
-        if (getCategory) {
-          console.info('Get Category By Id:', JSON.stringify(getCategory));
+        if (getCategoryById) {
+          console.info('Get Category By Id:', JSON.stringify(getCategoryById));
           response = {
             error: false,
             statusCode: 200,

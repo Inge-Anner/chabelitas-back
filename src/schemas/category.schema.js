@@ -18,8 +18,6 @@ const insertCategory = joi.object().keys({
 
 const updateCategory = joi.object().keys({
   categoryId: joi.number().integer().required(),
-  statusId: joi.number().integer(),
-  categoryName: joi.string(),
   }).required();
 
 const deleteCategory = joi
