@@ -20,9 +20,9 @@ const insertOrder = joi.object().keys({
   nameOrder: joi.string().required(),
   lastNameOrder: joi.string().required(),
   dateCreated: joi.date().required(),
-  dateConfirmed: joi.date().required(),
-  dateDeliver: joi.date().required(),
-  adressDeliver: joi.string().required(),
+  dateConfirmed: joi.date(),
+  dateDeliver: joi.date(),
+  adressDeliver: joi.string(),
   totalOrder: joi.number().required(),
   }).required();
 
@@ -40,12 +40,9 @@ const updateOrder = joi.object().keys({
   totalOrder: joi.number(),
   }).required();
 
-const deleteOrder = joi
-  .object()
-  .keys({
+const deleteOrder = joi.object().keys({
     orderId: joi.number().integer().required(),
-  })
-  .required();
+  }).required();
 
 module.exports = {
   getOrderById,

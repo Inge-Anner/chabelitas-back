@@ -1,4 +1,5 @@
 const sequelize = require('sequelize');
+const { Op } = require("sequelize");
 const { v4: uuidv4 } = require('uuid');
 const schema = require('../schemas/orders.schema');
 const { Order } = require('../models');//
@@ -76,7 +77,7 @@ const getOrderByDate = async (data) => {
 
       const where = {
         dateConfirmed: {
-          [sequelize.between]: [startDate, endDate]
+          [Op.between]: [startDate, endDate]
         }
       }
       
@@ -176,15 +177,15 @@ const updateOrder = async (data) => {
         message: error.details.map((e) => e.message),
       };
     } else {
-      const { OrderId } = value;
+      const { orderId } = value;
       console.info(
-        `Update Order to DB: id:${OrderId}`
+        `Update Order to DB: id:${orderId}`
       );
 
       let updatedOrder = null;
 
       const getOrder = await Order.findOne({
-        where: { OrderId },
+        where: { orderId },
       });
       console.info(`get Order: ${JSON.stringify(getOrder)}`);
 
@@ -245,16 +246,16 @@ const deleteOrderById = async (data) => {
         message: error.details.map((e) => e.message),
       };
     } else {
-      const { OrderId } = value;
-      console.info(`delete Order to DB with id: ${OrderId}`);
+      const { orderId } = value;
+      console.info(`delete Order to DB with id: ${orderId}`);
 
       const getOrder = await Order.findOne({
-        where: { OrderId },
+        where: { orderId },
       });
       console.info(`get Order: ${JSON.stringify(getOrder)}`);
 
       const params = {
-        statusOrderId: 5,
+        statusOrderId: 5,//
       };
       console.log(`params ${JSON.stringify(params)}`)
 

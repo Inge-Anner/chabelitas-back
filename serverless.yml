@@ -19,7 +19,7 @@ provider:
     serverSideEncryption: AES256
 functions:
   get-products:
-    handler: src/products.getProducts
+    handler: src/services/products.getProducts
     layers:
       - ${file(./config.json):${opt:stage, self:provider.stage, 'dev'}.DEPENDENCIES_LAYER}
     events:
@@ -28,7 +28,7 @@ functions:
           method: GET
           cors: true
   get-product-byId:
-    handler: src/products.getProductById
+    handler: src/services/products.getProductById
     layers:
       - ${file(./config.json):${opt:stage, self:provider.stage, 'dev'}.DEPENDENCIES_LAYER}
     events:
@@ -37,7 +37,7 @@ functions:
           method: GET
           cors: true
   insert-product:
-    handler: src/products.insertProduct
+    handler: src/services/products.insertProduct
     layers:
       - ${file(./config.json):${opt:stage, self:provider.stage, 'dev'}.DEPENDENCIES_LAYER}
     events:
@@ -46,7 +46,7 @@ functions:
           method: POST
           cors: true
   update-product:
-    handler: src/products.updateProduct
+    handler: src/services/products.updateProduct
     layers:
       - ${file(./config.json):${opt:stage, self:provider.stage, 'dev'}.DEPENDENCIES_LAYER}
     events:
@@ -55,7 +55,7 @@ functions:
           method: PUT
           cors: true
   delete-product:
-    handler: src/products.deleteProduct
+    handler: src/services/products.deleteProduct
     layers:
       - ${file(./config.json):${opt:stage, self:provider.stage, 'dev'}.DEPENDENCIES_LAYER}
     events:
@@ -64,7 +64,7 @@ functions:
           method: DELETE
           cors: true
   get-order-byId:
-    handler: src/orders.getOrderById
+    handler: src/services/orders.getOrderById
     layers:
       - ${file(./config.json):${opt:stage, self:provider.stage, 'dev'}.DEPENDENCIES_LAYER}
     events:
@@ -73,16 +73,16 @@ functions:
           method: GET
           cors: true
   get-order-byDate:
-    handler: src/orders.getOrderByDate
+    handler: src/services/orders.getOrderByDate
     layers:
       - ${file(./config.json):${opt:stage, self:provider.stage, 'dev'}.DEPENDENCIES_LAYER}
     events:
       - http:
-          path: /order/{startDate}/{endDate}
+          path: /order
           method: GET
           cors: true
   insert-order:
-    handler: src/orders.insertOrder
+    handler: src/services/orders.insertOrder
     layers:
       - ${file(./config.json):${opt:stage, self:provider.stage, 'dev'}.DEPENDENCIES_LAYER}
     events:
@@ -91,7 +91,7 @@ functions:
           method: POST
           cors: true
   update-order:
-    handler: src/orders.updateOrder
+    handler: src/services/orders.updateOrder
     layers:
       - ${file(./config.json):${opt:stage, self:provider.stage, 'dev'}.DEPENDENCIES_LAYER}
     events:
@@ -100,7 +100,7 @@ functions:
           method: PUT
           cors: true
   delete-order:
-    handler: src/orders.deleteOrderById
+    handler: src/services/orders.deleteOrderById
     layers:
       - ${file(./config.json):${opt:stage, self:provider.stage, 'dev'}.DEPENDENCIES_LAYER}
     events:
@@ -108,6 +108,7 @@ functions:
           path: /order/{orderId}
           method: DELETE
           cors: true
+
 
 package:
   patterns:
