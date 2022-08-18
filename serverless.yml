@@ -110,6 +110,55 @@ functions:
           cors: true
 
 
+get-users:
+    handler: src/services/users.getUser
+    layers:
+      - ${file(./config.json):${opt:stage, self:provider.stage, 'dev'}.DEPENDENCIES_LAYER}
+    events:
+      - http:
+          path: /User
+          method: GET
+          cors: true
+get-User-byId:
+    handler: src/services/users.getUserById
+    layers:
+      - ${file(./config.json):${opt:stage, self:provider.stage, 'dev'}.DEPENDENCIES_LAYER}
+    events:
+      - http:
+          path: /User/{userId}
+          method: GET
+          cors: true
+insert-User:
+    handler: src/services/users.insertUser
+    layers:
+      - ${file(./config.json):${opt:stage, self:provider.stage, 'dev'}.DEPENDENCIES_LAYER}
+    events:
+      - http:
+          path: /User
+          method: POST
+          cors: true
+update-User:
+    handler: src/services/users.updateUser
+    layers:
+      - ${file(./config.json):${opt:stage, self:provider.stage, 'dev'}.DEPENDENCIES_LAYER}
+    events:
+      - http:
+          path: /User/{userId}
+          method: PUT
+          cors: true
+delete-User:
+    handler: src/services/users.deleteUser
+    layers:
+      - ${file(./config.json):${opt:stage, self:provider.stage, 'dev'}.DEPENDENCIES_LAYER}
+    events:
+      - http:
+          path: /User/{userId}
+          method: DELETE
+          cors: true
+
+
+
+
 package:
   patterns:
     - '!dependencies_layer/**'
