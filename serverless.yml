@@ -110,19 +110,31 @@ functions:
           cors: true
   get-detail-order-byId:
     handler: src/services/detailorders.getDetailsOrderById
-    path: /detailorder/{orderId}
+    layers:
+      - ${file(./config.json):${opt:stage, self:provider.stage, 'dev'}.DEPENDENCIES_LAYER}
+    events:
+      - http:
+          path: /detailorder/{orderId}
           method: GET
           cors: true
   insert-detail-order:
     handler: src/services/detailorders.insertDetailsOrder
-    path: /detailorder
+    layers:
+      - ${file(./config.json):${opt:stage, self:provider.stage, 'dev'}.DEPENDENCIES_LAYER}
+    events:
+      - http:
+          path: /detailorder
           method: POST
           cors: true
   update-detail-order:
     handler: src/services/detailorders.updateDetailsOrder
-    path: /detailorder/{orderId}
-    method: PUT
-    cors: true
+    layers:
+      - ${file(./config.json):${opt:stage, self:provider.stage, 'dev'}.DEPENDENCIES_LAYER}
+    events:
+      - http:
+          path: /detailorder/{orderId}
+          method: PUT
+          cors: true
   get-users:
     handler: src/services/users.getUser
     layers:
