@@ -1,12 +1,11 @@
 const sequelize = require('sequelize');
-const { Op } = require("sequelize");
 const { v4: uuidv4 } = require('uuid');
-const schema = require('../schemas/orders.schema');
-const { Order } = require('../models');//
+const schema = require('../schemas/detailorders.schema');
+const { DetailsOrder } = require('../models');//
 
-const getOrderById = async (data) => {
+const getDetailsOrderById = async (data) => {
   try {
-    const { error, value } = schema.getOrderById.validate(data, {
+    const { error, value } = schema.getDetailOrderById.validate(data, {
       abortEarly: false,
     });
 
@@ -17,89 +16,30 @@ const getOrderById = async (data) => {
         message: error.details.map((e) => e.message),
       };
     } else {
-      const { orderId } = value;
-      console.info(`get Order to DB with id: ${orderId}`);
-      let getOrder = null;
+      const limit = value.limit ? parseInt(value.limit, 10) : 10;
 
-      const where = { orderId };
-
-      getOrder = await Order.findOne({
-        where,
-      });
-      console.info('get Order:', JSON.stringify(getOrder));
-
-      if (getOrder) {
-        console.info('Get Order By Id:', JSON.stringify(getOrder));
-        response = {
-          error: false,
-          statusCode: 200,
-          message: 'Get Order Successfully',
-          data: getOrder,
-        };
-      } else {
-        response = {
-          error: true,
-          statusCode: 404,
-          message: 'Order not Getting',
-        };
-      }
-      return response;
-    }
-  } catch (error) {
-    console.error(error);
-    response = {
-      error: true,
-      statusCode: 403,
-      message: 'Error to Get Order',
-    };
-    return response;
-  }
-};
-
-const getOrderByDate = async (data) => {
-  try {
-    const { error, value } = schema.getOrderByDate.validate(data, {
-      abortEarly: false,
-    });
-
-    if (error) {
-      return {
-        error: true,
-        statusCode: 400,
-        message: error.details.map((e) => e.message),
+      const findOptions = {
+        where: { orderId: value.orderId },
+        limit,
+        raw: true,
       };
-    } else {
 
+      const getDetailOrder = await DetailsOrder.findAll(findOptions);
+      console.info('get DetailOrder:', JSON.stringify(getDetailOrder));
 
-      const { startDate, endDate } = value;
-      console.info(`get Order to DB with date between: ${startDate}, ${endDate}`);
-      let getOrder = null;
-
-      const where = {
-        dateConfirmed: {
-          [Op.between]: [startDate, endDate]
-        }
-      }
-      
-      getOrder = await Order.findAll({
-        where,
-      });
-
-      console.info('get Order:', JSON.stringify(getOrder));
-
-      if (getOrder) {
-        console.info('Get Order By Date:', JSON.stringify(getOrder));
+      if (getDetailOrder) {
+        console.info('Get Product:', JSON.stringify(getDetailOrder));
         response = {
           error: false,
           statusCode: 200,
-          message: 'Get Order Successfully',
-          data: getOrder,
+          message: 'Get DetailOrder Successfully',
+          data: getDetailOrder,
         };
       } else {
         response = {
           error: true,
           statusCode: 404,
-          message: 'Order not Getting',
+          message: 'DetailOrder not Getting',
         };
       }
       return response;
@@ -109,15 +49,15 @@ const getOrderByDate = async (data) => {
     response = {
       error: true,
       statusCode: 403,
-      message: 'Error to Get Order',
+      message: 'Error to Get DetailOrder',
     };
     return response;
   }
 };
 
-const insertOrder = async (data) => {
+const insertDetailOrder = async (data) => {
   try {
-    const { error, value } = schema.insertOrder.validate(data, {
+    const { error, value } = schema.insertDetailOrder.validate(data, {
       abortEarly: false,
     });
 
@@ -129,26 +69,26 @@ const insertOrder = async (data) => {
       };
     } else {
       console.info(
-        `Insert Order to DB: ${JSON.stringify(value)}`
+        `Insert DetailOrder to DB: ${JSON.stringify(value)}`
       );
 
-      let insertedOrder = null;
+      let insertedDetailOrder = null;
 
-      insertedOrder = await Order.create(value);
+      insertedDetailOrder = await DetailsOrder.create(value);
 
-      if (insertedOrder) {
-        console.info('Order inserted:', JSON.stringify(insertedOrder));
+      if (insertedDetailOrder) {
+        console.info('Order inserted:', JSON.stringify(insertedDetailOrder));
         response = {
           error: false,
           statusCode: 201,
-          message: 'Order Inserted',
-          data: insertedOrder,
+          message: 'DetailOrder Inserted',
+          data: insertedDetailOrder,
         };
       } else {
         response = {
           error: true,
           statusCode: 404,
-          message: 'Order not Inserted',
+          message: 'DetailOrder not Inserted',
         };
       }
       return response;
@@ -158,15 +98,15 @@ const insertOrder = async (data) => {
     response = {
       error: true,
       statusCode: 403,
-      message: 'Error to Insert Order',
+      message: 'Error to Insert DetailOrder',
     };
     return response;
   }
 };
 
-const updateOrder = async (data) => {
+const updateDetailsOrder = async (data) => {
   try {
-    const { error, value } = schema.updateOrder.validate(data, {
+    const { error, value } = schema.updateDetailsOrder.validate(data, {
       abortEarly: false,
     });
 
@@ -179,45 +119,35 @@ const updateOrder = async (data) => {
     } else {
       const { orderId } = value;
       console.info(
-        `Update Order to DB: id:${orderId}`
+        `Update DetailsOrder to DB: id:${orderId}`
       );
 
-      let updatedOrder = null;
+      let updatedDetailsOrder = null;
 
-      const getOrder = await Order.findOne({
+      const getDetailsOrder = await DetailsOrder.findOne({
         where: { orderId },
       });
-      console.info(`get Order: ${JSON.stringify(getOrder)}`);
+      console.info(`get DetailsOrder: ${JSON.stringify(getDetailsOrder)}`);
 
       const params = {
-        orderId: value.orderId,
-        statusOrderId: value.statusOrderId,
-        phoneOrder: value.phoneOrder,
-        ticketOrder: value.ticketOrder,
-        nameOrder: value.nameOrder,
-        lastNameOrder: value.lastNameOrder,
-        dateCreated: value.dateCreated,
-        dateConfirmed: value.dateConfirmed,
-        dateDeliver: value.dateDeliver,
-        adressDeliver: value.adressDeliver,
-        totalOrder: value.totalOrder,
+        
       };
 
-      updatedOrder = await getOrder.update(params);
-      console.info('Order updated:', JSON.stringify(updatedOrder));
+      updatedDetailsOrder = await getDetailsOrder.update(params);
+      console.info('DetailsOrder updated:', JSON.stringify(updatedDetailsOrder));
 
-      if (updatedOrder) {
+      if (updatedDetailsOrder) {
         response = {
           error: false,
           statusCode: 200,
-          message: 'Order Updated',
-          data: updatedOrder,
+          message: 'DetailsOrder Updated',
+          data: updatedDetailsOrder,
         };
       } else {
         response = {
           error: true,
           statusCode: 404,
-          message: 'Order not Updated',
+          message: 'DetailsOrder not Updated',
         };
       }
       return response;
@@ -232,68 +162,8 @@ const updateOrder = async (data) => {
     return response;
   }
 };
-
-const deleteOrderById = async (data) => {
-  try {
-    const { error, value } = schema.deleteOrder.validate(data, {
-      abortEarly: false,
-    });
-
-    if (error) {
-      return {
-        error: true,
-        statusCode: 400,
-        message: error.details.map((e) => e.message),
-      };
-    } else {
-      const { orderId } = value;
-      console.info(`delete Order to DB with id: ${orderId}`);
-
-      const getOrder = await Order.findOne({
-        where: { orderId },
-      });
-      console.info(`get Order: ${JSON.stringify(getOrder)}`);
-
-      const params = {
-        statusOrderId: 5,//
-      };
-      console.log(`params ${JSON.stringify(params)}`)
-
-      updatedOrder = await getOrder.update(params);
-      console.info('Order Deleted:', JSON.stringify(updatedOrder));
-
-      if (updatedOrder) {
-        console.info('Deleted Order By Id:', JSON.stringify(updatedOrder));
-        response = {
-          error: false,
-          statusCode: 200,
-          message: 'Delete Order Successfully',
-          data: updatedOrder,
-        };
-      } else {
-        response = {
-          error: true,
-          statusCode: 404,
-          message: 'Order not Deleting',
-        };
-      }
-      return response;
-    }
-  } catch (error) {
-    console.error(error);
-    response = {
-      error: true,
-      statusCode: 403,
-      message: 'Error to Delete Order',
-    };
-    return response;
-  }
-};
-
 module.exports = {
-  getOrderById,
-  getOrderByDate,
-  insertOrder,
-  updateOrder,
-  deleteOrderById,
+  getDetailsOrderById,
+  insertDetailOrder,
+  updateDetailsOrder,
 };

@@ -1,7 +1,7 @@
 const chabelitaController = require('../controllers/category.controller');
 const headers = require('../lib/headers');
 const getBody = require('../lib/getBody');
-//
+
 const getCategory = async (event, context, callback) => {
   context.callbackWaitsForEmptyEventLoop = false;
 
@@ -238,4 +238,4 @@ const getCategoryById = async (event, context, callback) => {
     insertCategory,
     updateCategory,
     deleteCategoryById,
-  }; 
+};
