@@ -31,5 +31,5 @@ module.exports = (sequelize, DataTypes) => {
     modelName: 'Visualization',
     timestamps: false,
   });
-  return Visualization;
+  return Visualization
 }

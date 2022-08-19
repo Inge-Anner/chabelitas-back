@@ -9,7 +9,7 @@ const getVisualization = async (event, context, callback) => {
     headers,
     statusCode: 400,
     body: JSON.stringify({
-      message: 'Visualization not Getting',
+      message: 'Visualizations not Getting',
     }),
   };
   try {
