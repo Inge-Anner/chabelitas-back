@@ -225,6 +225,51 @@ functions:
           path: /category/{categoryId}
           method: DELETE
           cors: true
+  get-seasons:
+    handler: src/services/seasons.getSeason
+    layers:
+      - ${file(./config.json):${opt:stage, self:provider.stage, 'dev'}.DEPENDENCIES_LAYER}
+    events:
+      - http:
+          path: /seasons
+          method: GET
+          cors: true
+  get-seasons-byId:
+    handler: src/services/seasons.getSeasonById
+    layers:
+      - ${file(./config.json):${opt:stage, self:provider.stage, 'dev'}.DEPENDENCIES_LAYER}
+    events:
+      - http:
+          path: /seasons/{seasonId}
+          method: GET
+          cors: true
+  insert-seasons:
+    handler: src/services/seasons.insertSeason
+    layers:
+      - ${file(./config.json):${opt:stage, self:provider.stage, 'dev'}.DEPENDENCIES_LAYER}
+    events:
+      - http:
+          path: /seasons
+          method: POST
+          cors: true
+  update-seasons:
+    handler: src/services/seasons.updateSeason
+    layers:
+      - ${file(./config.json):${opt:stage, self:provider.stage, 'dev'}.DEPENDENCIES_LAYER}
+    events:
+      - http:
+          path: /seasons/{seasonId}
+          method: PUT
+          cors: true
+  delete-seasons:
+    handler: src/services/seasons.deleteSeasonById
+    layers:
+      - ${file(./config.json):${opt:stage, self:provider.stage, 'dev'}.DEPENDENCIES_LAYER}
+    events:
+      - http:
+          path: /seasons/{seasonId}
+          method: DELETE
+          cors: true 
 package:
   patterns:
     - '!dependencies_layer/**'
