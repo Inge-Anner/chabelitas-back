@@ -2,7 +2,7 @@ const chabelitaController = require('../controllers/seasons.controller');
 const headers = require('../lib/headers');
 const getBody = require('../lib/getBody');
 
-const getSeasons = async (event, context, callback) => {
+const getSeason = async (event, context, callback) => {
   context.callbackWaitsForEmptyEventLoop = false;
 
   let response = {
@@ -186,7 +186,7 @@ const updateSeason = async (event, context, callback) => {
   }
 };
 
-const deleteSeason = async (event, context, callback) => {
+const deleteSeasonById = async (event, context, callback) => {
   context.callbackWaitsForEmptyEventLoop = false;
 
   let response = {
@@ -233,10 +233,10 @@ const deleteSeason = async (event, context, callback) => {
 };
 
 module.exports = {
-  getSeasons,
+  getSeason,
   getSeasonById,
   insertSeason,
   updateSeason,
-  deleteSeason,
+  deleteSeasonById,
 };
 //

@@ -12,18 +12,17 @@ const getSeasonById = joi.object().keys({
   }).required();
 
 const insertSeason = joi.object().keys({
-  seasonId: joi.number().integer().required(),
   statusId: joi.number().integer().required(),
   seasonName: joi.string().required(),
   }).required();
 
 const updateSeason = joi.object().keys({
   seasonId: joi.number().integer().required(),
-  statusId: joi.number().integer().required(),
-  seasonName: joi.string().required(),
+  statusId: joi.number().integer(),
+  seasonName: joi.string(),
   }).required();
 
-const deleteSeason = joi
+const deleteSeasonById = joi
   .object()
   .keys({
     seasonId: joi.number().integer().required(),
@@ -35,5 +34,5 @@ module.exports = {
   getSeasonById,
   insertSeason,
   updateSeason,
-  deleteSeason,
+  deleteSeasonById,
 };

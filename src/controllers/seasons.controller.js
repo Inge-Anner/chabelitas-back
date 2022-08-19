@@ -70,22 +70,22 @@ const getSeasonById = async (data) => {
     } else {
       const { seasonId } = value;
       console.info(`get Season to DB with id: ${seasonId}`);
-      let getSeason = null;
+      let getSeasonById = null;
 
       const where = { seasonId };
 
-      getSeason = await Season.findOne({
+      getSeasonById = await Season.findOne({
         where,
       });
-      console.info('get Season:', JSON.stringify(getSeason));
+      console.info('get Season:', JSON.stringify(getSeasonById));
 
-      if (getSeason) {
-        console.info('Get Season By Id:', JSON.stringify(getSeason));
+      if (getSeasonById) {
+        console.info('Get Season By Id:', JSON.stringify(getSeasonById));
         response = {
           error: false,
           statusCode: 200,
           message: 'Get Season Successfully',
-          data: getSeason,
+          data: getSeasonById,
         };
       } else {
         response = {
@@ -181,7 +181,6 @@ const updateSeason = async (data) => {
       console.info(`get Season: ${JSON.stringify(getSeason)}`);
 
       const params = {
-        seasonId: value.seasonId,
         statusId: value.statusId,
         seasonName: value.seasonName,
       };
@@ -218,7 +217,7 @@ const updateSeason = async (data) => {
 
 const deleteSeasonById = async (data) => {
   try {
-    const { error, value } = schema.deleteSeason.validate(data, {
+    const { error, value } = schema.deleteSeasonById.validate(data, {
       abortEarly: false,
     });
 
