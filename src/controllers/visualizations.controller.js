@@ -19,7 +19,7 @@ const getVisualization = async (data) => {
       const limit = value.limit ? parseInt(value.limit, 10) : 10;
 
       const findOptions = {
-        where: { statusId: 1 },
+        //where: { statusId: 1 },
         limit,
         raw: true,
       };
