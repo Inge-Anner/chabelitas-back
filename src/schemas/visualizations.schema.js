@@ -12,13 +12,6 @@ const getVisualizationById = joi.object().keys({
   }).required();
 
 const insertVisualization = joi.object().keys({
-  visualizationId: joi.number().integer().required(),
-  productId: joi.number().integer().required(),
-  dateVisualization: joi.date().required(),
-  }).required();
-
-const updateVisualization = joi.object().keys({
-  visualizationId: joi.number().integer().required(),
   productId: joi.number().integer().required(),
   dateVisualization: joi.date().required(),
   }).required();
@@ -27,5 +20,4 @@ module.exports = {
   getVisualization,
   getVisualizationById,
   insertVisualization,
-  updateVisualization,
 };

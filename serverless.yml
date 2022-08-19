@@ -269,7 +269,34 @@ functions:
       - http:
           path: /seasons/{seasonId}
           method: DELETE
-          cors: true 
+          cors: true
+  get-visualizations:
+    handler: src/services/visualizations.getVisualization
+    layers:
+      - ${file(./config.json):${opt:stage, self:provider.stage, 'dev'}.DEPENDENCIES_LAYER}
+    events:
+      - http:
+          path: /visualizations
+          method: GET
+          cors: true
+  get-visualizations-byId:
+    handler: src/services/visualizations.getVisualizationById
+    layers:
+      - ${file(./config.json):${opt:stage, self:provider.stage, 'dev'}.DEPENDENCIES_LAYER}
+    events:
+      - http:
+          path: /visualizations/{visualizationId}
+          method: GET
+          cors: true
+  insert-visualizations:
+    handler: src/services/visualizations.insertVisualization
+    layers:
+      - ${file(./config.json):${opt:stage, self:provider.stage, 'dev'}.DEPENDENCIES_LAYER}
+    events:
+      - http:
+          path: /visualizations
+          method: POST
+          cors: true
 package:
   patterns:
     - '!dependencies_layer/**'
