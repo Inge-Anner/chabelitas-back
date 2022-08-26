@@ -62,7 +62,7 @@ functions:
       - http:
           path: /product/{productId}
           method: DELETE
-          cors: true
+          cors: true              
   get-order-byId:
     handler: src/handlers/orders.getOrderById
     layers:

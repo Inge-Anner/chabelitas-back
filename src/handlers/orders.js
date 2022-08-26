@@ -233,6 +233,7 @@ const deleteOrderById = async (event, context, callback) => {
 };
 
 module.exports = {
+  getOrder,
   getOrderById,
   getOrderByDate,
   insertOrder,

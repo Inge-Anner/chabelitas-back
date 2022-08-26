@@ -45,6 +45,7 @@ const deleteOrder = joi.object().keys({
   }).required();
 
 module.exports = {
+  getOrder,
   getOrderById,
   getOrderByDate,
   insertOrder,
