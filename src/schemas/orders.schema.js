@@ -3,6 +3,10 @@ const joiDate = require('@hapi/joi-date');
 
 const joi = joiBase.extend(joiDate);
 
+const getOrder = joi.object().keys({
+  limit: joi.number().integer(),
+}).required();
+
 const getOrderById = joi.object().keys({
   orderId: joi.number().integer().required(),
 }).required();

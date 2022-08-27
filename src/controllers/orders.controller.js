@@ -4,6 +4,58 @@ const { v4: uuidv4 } = require('uuid');
 const schema = require('../schemas/orders.schema');
 const { Order } = require('../models');//
 
+const getOrder = async (data) => {
+  try {
+    const { error, value } = schema.getOrder.validate(data, {
+      abortEarly: false,
+    });
+
+    if (error) {
+      return {
+        error: true,
+        statusCode: 400,
+        message: error.details.map((e) => e.message),
+      };
+    } else {
+      const limit = value.limit ? parseInt(value.limit, 10) : 10;
+
+      const findOptions = {
+        where: { statusOrderId: 3 },
+        limit,
+        raw: true,
+      };
+
+      const getOrder = await Order.findAll(findOptions);
+      console.info('get Order:', JSON.stringify(getOrder));
+
+      if (getOrder) {
+        console.info('Get Order:', JSON.stringify(getOrder));
+        response = {
+          error: false,
+          statusCode: 200,
+          message: 'Get Order Successfully',
+          data: getOrder,
+        };
+      } else {
+        response = {
+          error: true,
+          statusCode: 404,
+          message: 'Questions not Getting',
+        };
+      }
+      return response;
+    }
+  } catch (error) {
+    console.error(error);
+    response = {
+      error: true,
+      statusCode: 403,
+      message: 'Error to Get Questions',
+    };
+    return response;
+  }
+};
+
 const getOrderById = async (data) => {
   try {
     const { error, value } = schema.getOrderById.validate(data, {

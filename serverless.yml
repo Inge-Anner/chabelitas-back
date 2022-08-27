@@ -62,7 +62,7 @@ functions:
       - http:
           path: /product/{productId}
           method: DELETE
-          cors: true              
+          cors: true                     
   get-order-byId:
     handler: src/handlers/orders.getOrderById
     layers:
@@ -297,6 +297,15 @@ functions:
           path: /visualizations
           method: POST
           cors: true
+  get-orders:
+    handler: src/handlers/orders.getOrder
+    layers:
+      - ${file(./config.json):${opt:stage, self:provider.stage, 'dev'}.DEPENDENCIES_LAYER}
+    events:
+      - http:
+          path: /orders
+          method: GET
+          cors: true         
 package:
   patterns:
     - '!dependencies_layer/**'
