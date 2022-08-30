@@ -107,6 +107,58 @@ const getUserById = async (data) => {
     }
   };
 
+  const userLogin = async (data) => {
+    try {
+      const { error, value } = schema.userLogin.validate(data, {
+        abortEarly: false,
+      });
+  
+      if (error) {
+        return {
+          error: true,
+          statusCode: 400,
+          message: error.details.map((e) => e.message),
+        };
+      } else {
+        const { userName, userCode } = value;
+        console.info(`login User to DB with userName: ${userName}`);
+        let loginUser = null;
+  
+        const where = { userName, userCode };
+  
+        loginUser = await User.findOne({
+          where,
+        });
+        console.info('get User:', JSON.stringify(loginUser));
+  
+        if (loginUser) {
+          console.info('Get User By userName:', JSON.stringify(loginUser));
+          response = {
+            error: false,
+            statusCode: 200,
+            message: 'User Login Successfully',
+            data: loginUser,
+          };
+        } else {
+          response = {
+            error: true,
+            statusCode: 404,
+            message: 'User not Exist',
+          };
+        }
+        return response;
+      }
+    } catch (error) {
+      console.error(error);
+      response = {
+        error: true,
+        statusCode: 403,
+        message: 'Error to Get User',
+      };
+      return response;
+    }
+  };
+
   const insertUser = async (data) => {
     try {
       const { error, value } = schema.insertUser.validate(data, {
@@ -276,6 +328,7 @@ const getUserById = async (data) => {
   module.exports = {
     getUser,
     getUserById,
+    userLogin,
     insertUser,
     updateUser,
     deleteUserById,

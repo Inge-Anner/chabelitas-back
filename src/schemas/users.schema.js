@@ -11,6 +11,11 @@ const getUserById = joi.object().keys({
     userId: joi.number().integer().required(),
   }).required();
 
+  const userLogin = joi.object().keys({
+    userName: joi.string().required(),
+    userCode: joi.string().required(),
+  }).required();
+
 const insertUser = joi.object().keys({
   statusId: joi.number().integer().required(),
   userName: joi.string().required(),
@@ -34,6 +39,7 @@ const deleteUserById = joi
 module.exports = {
   getUser,
   getUserById,
+  userLogin,
   insertUser,
   updateUser,
   deleteUserById,

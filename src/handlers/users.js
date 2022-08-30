@@ -94,6 +94,52 @@ const getUserById = async (event, context, callback) => {
     }
   };
 
+  const userLogin = async (event, context, callback) => {
+    context.callbackWaitsForEmptyEventLoop = false;
+  
+    let response = {
+      headers,
+      statusCode: 400,
+      body: JSON.stringify({
+        message: 'Flow not Getting',
+      }),
+    };
+    try {
+      const body = getBody(event) || {};
+      const data = {
+        ...body,
+        ...event.pathParameters,
+        ...event.queryStringParameters,
+      };
+      console.info(`data ${JSON.stringify(data)}`);
+  
+      const result = await chabelitaController.userLogin(data);
+      console.log(`result ${JSON.stringify(result)}`);
+      if (!result.error) {
+        response = {
+          headers,
+          statusCode: 200,
+          body: JSON.stringify(result),
+        };
+      } else {
+        response = {
+          headers,
+          statusCode: result.statusCode,
+          body: JSON.stringify(result),
+        };
+      }
+    } catch (error) {
+      console.log(`error ${error}`);
+      response = {
+        headers,
+        statusCode: 403,
+        body: JSON.stringify(error),
+      };
+    } finally {
+      callback(null, response);
+    }
+  };
+
   const insertUser = async (event, context, callback) => {
     context.callbackWaitsForEmptyEventLoop = false;
   
@@ -235,6 +281,7 @@ const getUserById = async (event, context, callback) => {
   module.exports = {
     getUser,
     getUserById,
+    userLogin,
     insertUser,
     updateUser,
     deleteUser,
