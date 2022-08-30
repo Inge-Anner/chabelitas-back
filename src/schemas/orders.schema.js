@@ -23,7 +23,7 @@ const insertOrder = joi.object().keys({
   ticketOrder: joi.string().required(),
   nameOrder: joi.string().required(),
   lastNameOrder: joi.string().required(),
-  dateCreated: joi.date().required(),
+  dateCreated: joi.date(),
   dateConfirmed: joi.date(),
   dateDeliver: joi.date(),
   adressDeliver: joi.string(),
