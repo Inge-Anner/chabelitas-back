@@ -153,6 +153,15 @@ functions:
           path: /user/{userId}
           method: GET
           cors: true
+  login-user:
+    handler: src/handlers/users.userLogin
+    layers:
+      - ${file(./config.json):${opt:stage, self:provider.stage, 'dev'}.DEPENDENCIES_LAYER}
+    events:
+      - http:
+          path: /login
+          method: POST
+          cors: true
   insert-user:
     handler: src/handlers/users.insertUser
     layers:
