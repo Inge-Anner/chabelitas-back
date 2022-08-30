@@ -5,6 +5,7 @@ const joi = joiBase.extend(joiDate);
 
 const getProduct = joi.object().keys({
     limit: joi.number().integer(),
+    categoryId: joi.number().integer(),
   }).required();
 
 const getProductById = joi.object().keys({
