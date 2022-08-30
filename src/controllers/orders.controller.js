@@ -3,6 +3,7 @@ const { Op } = require("sequelize");
 const { v4: uuidv4 } = require('uuid');
 const schema = require('../schemas/orders.schema');
 const { Order } = require('../models');//
+const moment = require ('moment-timezone')
 
 const getOrder = async (data) => {
   try {
@@ -184,6 +185,8 @@ const insertOrder = async (data) => {
       );
 
       let insertedOrder = null;
+
+      value.dateCreated = moment().tz('America/Guatemala').format('YYYY-MM-DD HH:mm')
 
       insertedOrder = await Order.create(value);
 
