@@ -24,6 +24,10 @@ const getProduct = async (data) => {
         raw: true,
       };
 
+      if (value.categoryId !== 0) {
+        findOptions.where.categoryId = value.categoryId
+      }
+
       const getProduct = await Product.findAll(findOptions);
       console.info('get Product:', JSON.stringify(getProduct));
 
