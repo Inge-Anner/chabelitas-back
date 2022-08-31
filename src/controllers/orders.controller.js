@@ -21,7 +21,6 @@ const getOrder = async (data) => {
       const limit = value.limit ? parseInt(value.limit, 10) : 10;
 
       const findOptions = {
-        where: { statusOrderId: 3 },
         limit,
         raw: true,
       };

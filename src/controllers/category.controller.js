@@ -16,7 +16,7 @@ const getCategory = async (data) => {
         message: error.details.map((e) => e.message),
       };
     } else {
-      const limit = value.limit ? parseInt(value.limit, 10) : 10;
+      const limit = value.limit ? parseInt(value.limit, 50) : 50;
 
       const findOptions = {
         where: { statusId: 1 },
