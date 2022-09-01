@@ -18,10 +18,10 @@ const getOrder = async (data) => {
         message: error.details.map((e) => e.message),
       };
     } else {
-      const limit = value.limit ? parseInt(value.limit, 10) : 10;
+     
 
       const findOptions = {
-        limit,
+      
         raw: true,
       };
 
