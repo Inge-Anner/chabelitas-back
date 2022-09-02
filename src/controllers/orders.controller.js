@@ -18,10 +18,13 @@ const getOrder = async (data) => {
         message: error.details.map((e) => e.message),
       };
     } else {
-     
 
       const findOptions = {
-      
+        where: {
+          statusOrderId: {
+            [Op.between]: [1, 3]
+          }
+        },
         raw: true,
       };
 
