@@ -34,8 +34,8 @@ const updateOrder = joi.object().keys({
   nameOrder: joi.string(),
   lastNameOrder: joi.string(),
   dateCreated: joi.date(),
-  dateConfirmed: joi.date(),
-  dateDeliver: joi.date(),
+  dateConfirmed: joi.date().allow(null),
+  dateDeliver: joi.date().allow(null),
   adressDeliver: joi.string(),
   totalOrder: joi.number(),
   }).required();
