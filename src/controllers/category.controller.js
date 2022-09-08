@@ -19,8 +19,6 @@ const getCategory = async (data) => {
       const limit = value.limit ? parseInt(value.limit, 50) : 50;
 
       const findOptions = {
-        where: { statusId: 1 },
-        limit,
         raw: true,
       };
 
