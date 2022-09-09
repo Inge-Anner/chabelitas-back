@@ -204,7 +204,7 @@ functions:
       - ${file(./config.json):${opt:stage, self:provider.stage, 'dev'}.DEPENDENCIES_LAYER}
     events:
       - http:
-          path: /categories
+          path: /categories/Admin
           method: GET
           cors: true        
   get-category-byId:
@@ -258,7 +258,7 @@ functions:
       - ${file(./config.json):${opt:stage, self:provider.stage, 'dev'}.DEPENDENCIES_LAYER}
     events:
       - http:
-          path: /season
+          path: /seasons/Admin
           method: GET
           cors: true        
   get-seasons-byId:
