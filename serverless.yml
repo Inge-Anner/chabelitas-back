@@ -204,7 +204,7 @@ functions:
       - ${file(./config.json):${opt:stage, self:provider.stage, 'dev'}.DEPENDENCIES_LAYER}
     events:
       - http:
-          path: /categorys
+          path: /categories
           method: GET
           cors: true        
   get-category-byId:
