@@ -198,6 +198,15 @@ functions:
           path: /category
           method: GET
           cors: true
+  get-category-byAdmin:
+    handler: src/handlers/category.getCategoryByAdmin
+    layers:
+      - ${file(./config.json):${opt:stage, self:provider.stage, 'dev'}.DEPENDENCIES_LAYER}
+    events:
+      - http:
+          path: /categorys
+          method: GET
+          cors: true        
   get-category-byId:
     handler: src/handlers/category.getCategoryById
     layers:
@@ -243,6 +252,15 @@ functions:
           path: /seasons
           method: GET
           cors: true
+  get-seasons-byAdmin:
+    handler: src/handlers/seasons.getSeasonByAdmin
+    layers:
+      - ${file(./config.json):${opt:stage, self:provider.stage, 'dev'}.DEPENDENCIES_LAYER}
+    events:
+      - http:
+          path: /season
+          method: GET
+          cors: true        
   get-seasons-byId:
     handler: src/handlers/seasons.getSeasonById
     layers:

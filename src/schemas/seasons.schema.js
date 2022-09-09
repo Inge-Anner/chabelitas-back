@@ -7,6 +7,10 @@ const getSeason = joi.object().keys({
     limit: joi.number().integer(),
   }).required();
 
+const getSeasonByAdmin = joi.object().keys({
+    limit: joi.number().integer(),
+  }).required();
+
 const getSeasonById = joi.object().keys({
     seasonId: joi.number().integer().required(),
   }).required();
@@ -31,6 +35,7 @@ const deleteSeasonById = joi
 
 module.exports = {
   getSeason,
+  getSeasonByAdmin,
   getSeasonById,
   insertSeason,
   updateSeason,

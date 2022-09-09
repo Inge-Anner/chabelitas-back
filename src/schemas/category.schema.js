@@ -7,6 +7,10 @@ const getCategory = joi.object().keys({
     limit: joi.number().integer(),
   }).required();
 
+const getCategoryByAdmin = joi.object().keys({
+    limit: joi.number().integer(),
+  }).required();
+
 const getCategoryById = joi.object().keys({
     categoryId: joi.number().integer().required(),
   }).required();
@@ -31,6 +35,7 @@ const deleteCategory = joi
 
 module.exports = {
   getCategory,
+  getCategoryByAdmin,
   getCategoryById,
   insertCategory,
   updateCategory,

@@ -55,6 +55,57 @@ const getSeason = async (data) => {
   }
 };
 
+const getSeasonByAdmin = async (data) => {
+  try {
+    const { error, value } = schema.getSeasonByAdmin.validate(data, {
+      abortEarly: false,
+    });
+
+    if (error) {
+      return {
+        error: true,
+        statusCode: 400,
+        message: error.details.map((e) => e.message),
+      };
+    } else {
+      const limit = value.limit ? parseInt(value.limit, 10) : 10;
+
+      const findOptions = {
+        raw: true,
+      };
+
+      const getSeasonByAdmin = await Season.findAll(findOptions);
+      console.info('get Season:', JSON.stringify(getSeasonByAdmin));
+
+      if (getSeasonByAdmin) {
+        console.info('Get Season:', JSON.stringify(getSeasonByAdmin));
+        response = {
+          error: false,
+          statusCode: 200,
+          message: 'Get Seasons Successfully',
+          data: getSeasonByAdmin,
+        };
+      } else {
+        response = {
+          error: true,
+          statusCode: 404,
+          message: 'Questions not Getting',
+        };
+      }
+      return response;
+    }
+  } catch (error) {
+    console.error(error);
+    response = {
+      error: true,
+      statusCode: 403,
+      message: 'Error to Get Questions',
+    };
+    return response;
+  }
+};
+
+
 const getSeasonById = async (data) => {
   try {
     const { error, value } = schema.getSeasonById.validate(data, {
@@ -274,6 +325,7 @@ const deleteSeasonById = async (data) => {
 
 module.exports = {
   getSeason,
+  getSeasonByAdmin,
   getSeasonById,
   insertSeason,
   updateSeason,

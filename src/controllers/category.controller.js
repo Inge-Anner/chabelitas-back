@@ -19,6 +19,8 @@ const getCategory = async (data) => {
       const limit = value.limit ? parseInt(value.limit, 50) : 50;
 
       const findOptions = {
+        where: { statusId: 1 },
+        limit,
         raw: true,
       };
 
@@ -32,6 +34,56 @@ const getCategory = async (data) => {
           statusCode: 200,
           message: 'Get Category Successfully',
           data: getCategory,
+        };
+      } else {
+        response = {
+          error: true,
+          statusCode: 404,
+          message: 'Questions not Getting',
+        };
+      }
+      return response;
+    }
+  } catch (error) {
+    console.error(error);
+    response = {
+      error: true,
+      statusCode: 403,
+      message: 'Error to Get Questions',
+    };
+    return response;
+  }
+};
+
+const getCategoryByAdmin = async (data) => {
+  try {
+    const { error, value } = schema.getCategoryByAdmin.validate(data, {
+      abortEarly: false,
+    });
+
+    if (error) {
+      return {
+        error: true,
+        statusCode: 400,
+        message: error.details.map((e) => e.message),
+      };
+    } else {
+      const limit = value.limit ? parseInt(value.limit, 50) : 50;
+
+      const findOptions = {
+        raw: true,
+      };
+
+      const getCategoryByAdmin = await Category.findAll(findOptions);
+      console.info('get Category:', JSON.stringify(getCategoryByAdmin));
+
+      if (getCategoryByAdmin) {
+        console.info('Get Category:', JSON.stringify(getCategoryByAdmin));
+        response = {
+          error: false,
+          statusCode: 200,
+          message: 'Get Category Successfully',
+          data: getCategoryByAdmin,
         };
       } else {
         response = {
@@ -272,6 +324,7 @@ const getCategoryById = async (data) => {
   
   module.exports = {
     getCategory,
+    getCategoryByAdmin,
     getCategoryById,
     insertCategory,
     updateCategory,
