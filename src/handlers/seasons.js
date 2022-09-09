@@ -48,6 +48,53 @@ const getSeason = async (event, context, callback) => {
   }
 };
 
+const getSeasonByAdmin = async (event, context, callback) => {
+  context.callbackWaitsForEmptyEventLoop = false;
+
+  let response = {
+    headers,
+    statusCode: 400,
+    body: JSON.stringify({
+      message: 'Seasons not Getting',
+    }),
+  };
+  try {
+    const body = getBody(event) || {};
+    const data = {
+      ...body,
+      ...event.pathParameters,
+      ...event.queryStringParameters,
+    };
+    console.info(`data ${JSON.stringify(data)}`);
+
+    const result = await chabelitaController.getSeasonByAdmin(data);
+    console.log(`result ${JSON.stringify(result)}`);
+    if (!result.error) {
+      response = {
+        headers,
+        statusCode: 200,
+        body: JSON.stringify(result),
+      };
+    } else {
+      response = {
+        headers,
+        statusCode: result.statusCode,
+        body: JSON.stringify(result),
+      };
+    }
+  } catch (error) {
+    console.log(`error ${error}`);
+    response = {
+      headers,
+      statusCode: 403,
+      body: JSON.stringify(error),
+    };
+  } finally {
+    callback(null, response);
+  }
+};
+
+
 const getSeasonById = async (event, context, callback) => {
   context.callbackWaitsForEmptyEventLoop = false;
 
@@ -234,6 +281,7 @@ const deleteSeasonById = async (event, context, callback) => {
 
 module.exports = {
   getSeason,
+  getSeasonByAdmin,
   getSeasonById,
   insertSeason,
   updateSeason,
