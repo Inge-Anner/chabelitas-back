@@ -115,6 +115,62 @@ const getProductPersonalized = async (data) => {
   }
 };
 
+const getProductTopping = async (data) => {
+  try {
+    const { error, value } = schema.getProductTopping.validate(data, {
+      abortEarly: false,
+    });
+
+    if (error) {
+      return {
+        error: true,
+        statusCode: 400,
+        message: error.details.map((e) => e.message),
+      };
+    } else {
+      const limit = value.limit ? parseInt(value.limit, 50) : 50;
+
+      const findOptions = {
+        where: { categoryId: 15 },
+        limit,
+        raw: true,
+      };
+
+      if (value.categoryId == 15) {
+        findOptions.where.categoryId = value.categoryId
+      }
+
+      const getProductTopping = await Product.findAll(findOptions);
+      console.info('get Product:', JSON.stringify(getProductTopping));
+
+      if (getProductTopping) {
+        console.info('Get Product:', JSON.stringify(getProductTopping));
+        response = {
+          error: false,
+          statusCode: 200,
+          message: 'Get Products Successfully',
+          data: getProductTopping,
+        };
+      } else {
+        response = {
+          error: true,
+          statusCode: 404,
+          message: 'Questions not Getting',
+        };
+      }
+      return response;
+    }
+  } catch (error) {
+    console.error(error);
+    response = {
+      error: true,
+      statusCode: 403,
+      message: 'Error to Get Questions',
+    };
+    return response;
+  }
+};
+
 
 const getProductById = async (data) => {
   try {
@@ -341,6 +397,7 @@ const deleteProductById = async (data) => {
 module.exports = {
   getProduct,
   getProductPersonalized,
+  getProductTopping,
   getProductById,
   insertProduct,
   updateProduct,
