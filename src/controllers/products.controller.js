@@ -59,6 +59,63 @@ const getProduct = async (data) => {
   }
 };
 
+const getProductPersonalized = async (data) => {
+  try {
+    const { error, value } = schema.getProductPersonalized.validate(data, {
+      abortEarly: false,
+    });
+
+    if (error) {
+      return {
+        error: true,
+        statusCode: 400,
+        message: error.details.map((e) => e.message),
+      };
+    } else {
+      const limit = value.limit ? parseInt(value.limit, 50) : 50;
+
+      const findOptions = {
+        where: { categoryId: 14 },
+        limit,
+        raw: true,
+      };
+
+      if (value.categoryId == 14) {
+        findOptions.where.categoryId = value.categoryId
+      }
+
+      const getProductPersonalized = await Product.findAll(findOptions);
+      console.info('get Product:', JSON.stringify(getProductPersonalized));
+
+      if (getProductPersonalized) {
+        console.info('Get Product:', JSON.stringify(getProductPersonalized));
+        response = {
+          error: false,
+          statusCode: 200,
+          message: 'Get Products Successfully',
+          data: getProductPersonalized,
+        };
+      } else {
+        response = {
+          error: true,
+          statusCode: 404,
+          message: 'Questions not Getting',
+        };
+      }
+      return response;
+    }
+  } catch (error) {
+    console.error(error);
+    response = {
+      error: true,
+      statusCode: 403,
+      message: 'Error to Get Questions',
+    };
+    return response;
+  }
+};
+
+
 const getProductById = async (data) => {
   try {
     const { error, value } = schema.getProductById.validate(data, {
@@ -283,6 +340,7 @@ const deleteProductById = async (data) => {
 
 module.exports = {
   getProduct,
+  getProductPersonalized,
   getProductById,
   insertProduct,
   updateProduct,

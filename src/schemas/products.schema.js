@@ -8,6 +8,11 @@ const getProduct = joi.object().keys({
     categoryId: joi.number().integer(),
   }).required();
 
+  const getProductPersonalized = joi.object().keys({
+    limit: joi.number().integer(),
+    categoryId: joi.number().integer(),
+  }).required();
+
 const getProductById = joi.object().keys({
     productId: joi.number().integer().required(),
   }).required();
@@ -42,6 +47,7 @@ const deleteProduct = joi
 
 module.exports = {
   getProduct,
+  getProductPersonalized,
   getProductById,
   insertProduct,
   updateProduct,
