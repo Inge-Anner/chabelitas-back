@@ -94,6 +94,52 @@ const getProductsPersonalized = async (event, context, callback) => {
   }
 };
 
+const getProductsTopping = async (event, context, callback) => {
+  context.callbackWaitsForEmptyEventLoop = false;
+
+  let response = {
+    headers,
+    statusCode: 400,
+    body: JSON.stringify({
+      message: 'Products not Getting',
+    }),
+  };
+  try {
+    const body = getBody(event) || {};
+    const data = {
+      ...body,
+      ...event.pathParameters,
+      ...event.queryStringParameters,
+    };
+    console.info(`data ${JSON.stringify(data)}`);
+
+    const result = await chabelitaController.getProductTopping(data);
+    console.log(`result ${JSON.stringify(result)}`);
+    if (!result.error) {
+      response = {
+        headers,
+        statusCode: 200,
+        body: JSON.stringify(result),
+      };
+    } else {
+      response = {
+        headers,
+        statusCode: result.statusCode,
+        body: JSON.stringify(result),
+      };
+    }
+  } catch (error) {
+    console.log(`error ${error}`);
+    response = {
+      headers,
+      statusCode: 403,
+      body: JSON.stringify(error),
+    };
+  } finally {
+    callback(null, response);
+  }
+};
+
 const getProductById = async (event, context, callback) => {
   context.callbackWaitsForEmptyEventLoop = false;
 
@@ -281,6 +327,7 @@ const deleteProduct = async (event, context, callback) => {
 module.exports = {
   getProducts,
   getProductsPersonalized,
+  getProductsTopping,
   getProductById,
   insertProduct,
   updateProduct,
