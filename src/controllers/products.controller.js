@@ -16,17 +16,13 @@ const getProduct = async (data) => {
         message: error.details.map((e) => e.message),
       };
     } else {
-      const limit = value.limit ? parseInt(value.limit, 50) : 50;
-
+      const limit = value.limit ? parseInt(value.limit, 200) : 200;
+      
       const findOptions = {
         where: { statusId: 1 },
         limit,
         raw: true,
       };
-
-      if (value.categoryId !== 0) {
-        findOptions.where.categoryId = value.categoryId
-      }
 
       const getProduct = await Product.findAll(findOptions);
       console.info('get Product:', JSON.stringify(getProduct));
