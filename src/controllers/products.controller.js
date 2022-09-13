@@ -1,7 +1,9 @@
 const sequelize = require('sequelize');
+const { Op, and } = require("sequelize");
 const { v4: uuidv4 } = require('uuid');
 const schema = require('../schemas/products.schema');
 const { Product } = require('../models');
+const { not } = require('joi');
 
 const getProduct = async (data) => {
   try {
@@ -19,8 +21,11 @@ const getProduct = async (data) => {
       const limit = value.limit ? parseInt(value.limit, 200) : 200;
       
       const findOptions = {
-        where: { statusId: 1 },
-        limit,
+        where: {
+          categoryId: {
+            [Op.notBetween]: [14, 15]
+          }
+        },
         raw: true,
       };
 
