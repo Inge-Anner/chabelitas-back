@@ -27,6 +27,15 @@ functions:
           path: /product
           method: GET
           cors: true
+  get-products-all:
+    handler: src/handlers/products.getProductsAll
+    layers:
+      - ${file(./config.json):${opt:stage, self:provider.stage, 'dev'}.DEPENDENCIES_LAYER}
+    events:
+      - http:
+          path: /product/All
+          method: GET
+          cors: true        
   get-products-personalized:
     handler: src/handlers/products.getProductsPersonalized
     layers:

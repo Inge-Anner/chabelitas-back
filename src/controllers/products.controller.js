@@ -55,6 +55,57 @@ const getProduct = async (data) => {
   }
 };
 
+const getProductAll = async (data) => {
+  try {
+    const { error, value } = schema.getProductAll.validate(data, {
+      abortEarly: false,
+    });
+
+    if (error) {
+      return {
+        error: true,
+        statusCode: 400,
+        message: error.details.map((e) => e.message),
+      };
+    } else {
+      const limit = value.limit ? parseInt(value.limit, 200) : 200;
+      
+      const findOptions = {
+        raw: true,
+      };
+
+      const getProductAll = await Product.findAll(findOptions);
+      console.info('get Product:', JSON.stringify(getProductAll));
+
+      if (getProductAll) {
+        console.info('Get Product:', JSON.stringify(getProductAll));
+        response = {
+          error: false,
+          statusCode: 200,
+          message: 'Get Products Successfully',
+          data: getProductAll,
+        };
+      } else {
+        response = {
+          error: true,
+          statusCode: 404,
+          message: 'Questions not Getting',
+        };
+      }
+      return response;
+    }
+  } catch (error) {
+    console.error(error);
+    response = {
+      error: true,
+      statusCode: 403,
+      message: 'Error to Get Questions',
+    };
+    return response;
+  }
+};
+
+
 const getProductPersonalized = async (data) => {
   try {
     const { error, value } = schema.getProductPersonalized.validate(data, {
@@ -392,6 +443,7 @@ const deleteProductById = async (data) => {
 
 module.exports = {
   getProduct,
+  getProductAll,
   getProductPersonalized,
   getProductTopping,
   getProductById,
