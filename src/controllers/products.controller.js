@@ -23,11 +23,17 @@ const getProduct = async (data) => {
       const findOptions = {
         where: {
           categoryId: {
-            [Op.notBetween]: [14, 15]
+            [Op.notBetween]: [14, 15] 
           }
+          
         },
+        
         raw: true,
       };
+
+      if (value.statusId = 1) {
+        findOptions.where.statusId = value.statusId
+      }
 
       const getProduct = await Product.findAll(findOptions);
       console.info('get Product:', JSON.stringify(getProduct));
