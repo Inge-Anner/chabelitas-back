@@ -31,6 +31,10 @@ const getProduct = async (data) => {
         raw: true,
       };
 
+      if (value.categoryId !== 0) {
+        findOptions.where.categoryId = value.categoryId
+      }
+
       if (value.statusId = 1) {
         findOptions.where.statusId = value.statusId
       }
