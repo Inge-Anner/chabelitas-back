@@ -26,7 +26,7 @@
     "path": "^0.12.7",
     "sequelize": "^6.21.3",
     "serverless-deployment-bucket": "^1.6.0",
-    "serverless-offline": "^10.0.2",
+    "serverless-offline": "^10.1.0",
     "serverless-prune-plugin": "^2.0.1",
     "uuid": "^8.3.2"
   }
