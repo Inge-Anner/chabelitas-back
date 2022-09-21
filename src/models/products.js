@@ -46,6 +46,19 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       field: 'imagen',
     },
+    portionsMin: {
+      type: DataTypes.INTEGER,
+      field: 'porciones_min',
+    },
+    toppingsYes: {
+      type: DataTypes.INTEGER,
+      field: 'toppings_si',
+    },
+    categoryTopping: {
+      type: DataTypes.INTEGER,
+      field: 'categ_topping',
+    },
+
   }, {
     sequelize,
     modelName: 'Product',
