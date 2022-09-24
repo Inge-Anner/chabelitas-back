@@ -36,6 +36,9 @@ const insertProduct = joi.object().keys({
   productDescription: joi.string(),
   productPrice: joi.number().required(),
   productImage: joi.string(),
+  portionsMin: joi.number().integer().allow(null),
+  toppingsYes: joi.number().integer().allow(null),
+  categoryTopping: joi.number().integer().allow(null),
   }).required();
 
 const updateProduct = joi.object().keys({
@@ -47,6 +50,9 @@ const updateProduct = joi.object().keys({
     productDescription: joi.string(),
     productPrice: joi.number(),
     productImage: joi.string(),
+    portionsMin: joi.number().integer().allow(null),
+    toppingsYes: joi.number().integer().allow(null),
+    categoryTopping: joi.number().integer().allow(null),
   }).required();
 
 const deleteProduct = joi

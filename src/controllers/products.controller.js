@@ -367,6 +367,9 @@ const updateProduct = async (data) => {
         productDescription: value.productDescription,
         productPrice: value.productPrice,
         productImage: value.productImage,
+        portionsMin: value.portionsMin,
+        toppingsYes: value.toppingsYes,
+        categoryTopping: value.categoryTopping,
       };
 
       updatedProduct = await getProduct.update(params);
