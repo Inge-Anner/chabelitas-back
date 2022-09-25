@@ -1,9 +1,6 @@
 const { Model } = require('sequelize');
-const { Product } = sequelize.define('../models');
 
-Season.hasToMany(Product);
-
-module.exports = (sequelize, DataTypes, Product) => {
+module.exports = (sequelize, DataTypes, ) => {
   class Season extends Model {
     /**
      * Helper method for defining associations.

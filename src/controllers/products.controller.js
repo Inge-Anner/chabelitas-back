@@ -21,31 +21,31 @@ const getProduct = async (data) => {
       };
     } else {
       const limit = value.limit ? parseInt(value.limit, 200) : 200;
-      
+
       const findOptions = {
         include : [
           {
             model: Category,
-            required: false,
+            required: true,
             attributes: [],
-            where:{
-              statusId: 1
+            on: {
+              'id_categoria': { [Op.eq]: sequelize.col('Product.id_categoria') },
+              'id_estado': { [Op.eq]: 1 },
             },
-            include : [
-              {
-                model: Season,
-                required: false,
-                attributes: [],
-                where:{
-                  statusId: 1
-                }
-              }
-            ],
-          }
+          },
+            {
+              model: Season,
+              required: true,
+              attributes: [],
+              on: {
+                'id_temporada': { [Op.eq]: sequelize.col('Product.id_temporada') },
+                'id_estado': { [Op.eq]: 1 },
+              },
+            }
         ],
         where: {
           categoryId: {
-            [Op.notBetween]: [14, 15] 
+            [Op.notBetween]: [14, 15]
           }
         },
         raw: true,

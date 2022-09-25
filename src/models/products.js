@@ -1,9 +1,4 @@
 const { Model } = require('sequelize');
-const { Category } = sequelize.define('../models');
-const { Season } = sequelize.define('../models');
-
-Product.belongsTo(Category);
-Product.belongsTo(Season);
 
 module.exports = (sequelize, DataTypes) => {
   class Product extends Model {
@@ -13,6 +8,14 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
+      Product.belongsTo(models.Category, {
+        // as: 'category',
+        foreignKey: 'id_categoria',
+      })
+      Product.belongsTo(models.Season, {
+        // as: 'category',
+        foreignKey: 'id_temporada',
+      })
     }
   }
 
