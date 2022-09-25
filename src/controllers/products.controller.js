@@ -4,6 +4,8 @@ const { v4: uuidv4 } = require('uuid');
 const schema = require('../schemas/products.schema');
 const { Product } = require('../models');
 const { not } = require('joi');
+const { Category } = require('../models');
+const { Season } = require('../models');
 
 const getProduct = async (data) => {
   try {
@@ -21,13 +23,31 @@ const getProduct = async (data) => {
       const limit = value.limit ? parseInt(value.limit, 200) : 200;
       
       const findOptions = {
+        include : [
+          {
+            model: Category,
+            required: false,
+            attributes: [],
+            where:{
+              statusId: 1
+            },
+            include : [
+              {
+                model: Season,
+                required: false,
+                attributes: [],
+                where:{
+                  statusId: 1
+                }
+              }
+            ],
+          }
+        ],
         where: {
           categoryId: {
             [Op.notBetween]: [14, 15] 
           }
-          
         },
-        
         raw: true,
       };
 

@@ -1,9 +1,14 @@
-const { Model } = require('sequelize')
+const { Model } = require('sequelize');
+const { Category } = sequelize.define('../models');
+const { Season } = sequelize.define('../models');
+
+Product.belongsTo(Category);
+Product.belongsTo(Season);
 
 module.exports = (sequelize, DataTypes) => {
   class Product extends Model {
     /**
-     * Helper method for defining associations.
+     * Helper method for defining associations.S
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
