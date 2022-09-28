@@ -1,6 +1,6 @@
-const { Model } = require('sequelize')
+const { Model } = require('sequelize');
 
-module.exports = (sequelize, DataTypes) => {
+module.exports = (sequelize, DataTypes, ) => {
   class Season extends Model {
     /**
      * Helper method for defining associations.

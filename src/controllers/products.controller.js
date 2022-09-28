@@ -4,6 +4,8 @@ const { v4: uuidv4 } = require('uuid');
 const schema = require('../schemas/products.schema');
 const { Product } = require('../models');
 const { not } = require('joi');
+const { Category } = require('../models');
+const { Season } = require('../models');
 
 const getProduct = async (data) => {
   try {
@@ -19,15 +21,33 @@ const getProduct = async (data) => {
       };
     } else {
       const limit = value.limit ? parseInt(value.limit, 200) : 200;
-      
+
       const findOptions = {
+        include : [
+          {
+            model: Category,
+            required: true,
+            attributes: [],
+            on: {
+              'id_categoria': { [Op.eq]: sequelize.col('Product.id_categoria') },
+              'id_estado': { [Op.eq]: 1 },
+            },
+          },
+            {
+              model: Season,
+              required: true,
+              attributes: [],
+              on: {
+                'id_temporada': { [Op.eq]: sequelize.col('Product.id_temporada') },
+                'id_estado': { [Op.eq]: 1 },
+              },
+            }
+        ],
         where: {
           categoryId: {
-            [Op.notBetween]: [14, 15] 
+            [Op.notBetween]: [14, 15]
           }
-          
         },
-        
         raw: true,
       };
 

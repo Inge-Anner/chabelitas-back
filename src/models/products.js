@@ -1,13 +1,21 @@
-const { Model } = require('sequelize')
+const { Model } = require('sequelize');
 
 module.exports = (sequelize, DataTypes) => {
   class Product extends Model {
     /**
-     * Helper method for defining associations.
+     * Helper method for defining associations.S
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
+      Product.belongsTo(models.Category, {
+        // as: 'category',
+        foreignKey: 'id_categoria',
+      })
+      Product.belongsTo(models.Season, {
+        // as: 'category',
+        foreignKey: 'id_temporada',
+      })
     }
   }
 
